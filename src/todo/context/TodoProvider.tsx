@@ -26,12 +26,12 @@ interface props {
 }
 
 export const TodoProvider = ({ children }: props) => {
-  const [TodoState, dispatch] = useReducer(TodoReducer, INITIAL_STATE);
+  const [todoState, dispatch] = useReducer(TodoReducer, INITIAL_STATE);
 
   return (
     <TodoContext.Provider
       value={{
-        TodoState,
+        todoState
       }}
     >
       {children}
