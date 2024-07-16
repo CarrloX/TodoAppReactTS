@@ -1,3 +1,4 @@
+import { useTodos } from "../hooks/UseTodo";
 import { Todo } from "../interfaces/interfaces";
 
 interface props {
@@ -5,9 +6,18 @@ interface props {
 }
 
 export const TodoItem = ({ todo }: props) => {
-  const handleDbClick = () => {
-    console.log("handleDbClick:", todo.desc);
-  };
 
-  return <li onDoubleClick={handleDbClick}>{todo.desc}</li>;
+  const{toggleTodo} = useTodos();
+
+  return (
+    <li
+      style={{
+        cursor: "pointer",
+        textDecoration: todo.completed ? "line-through" : "",
+      }}
+      onDoubleClick={()=>toggleTodo(todo.id)}
+    >
+      {todo.desc}
+    </li>
+  );
 };

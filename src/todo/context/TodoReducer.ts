@@ -10,13 +10,27 @@ type TodoAction =
       payload: { id: string };
     };
 
-export const TodoReducer = (state: TodoState, action: TodoAction):TodoState => {
+export const TodoReducer = (
+  state: TodoState,
+  action: TodoAction
+): TodoState => {
   switch (action.type) {
-    case 'addToDo':
-      return{
+    case "addToDo":
+      return {
         ...state,
-        todos:[...state.todos,action.payload]
-      }
+        todos: [...state.todos, action.payload],
+      };
+
+    case "toggleTodo":
+      return {
+        ...state,
+        todos: state.todos.map(({ ...todo }) => {
+          if (todo.id === action.payload.id) {
+            todo.completed = !todo.completed;
+          }
+          return todo;
+        }),
+      };
 
     default:
       return state;
